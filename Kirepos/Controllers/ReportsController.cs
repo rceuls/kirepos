@@ -20,7 +20,7 @@ namespace Kirepos.Controllers
 
         [HttpGet()]
         [Authorize]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
         }
@@ -33,14 +33,14 @@ namespace Kirepos.Controllers
 
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<IActionResult> Details(Guid id)
+        public IActionResult Details(Guid id)
         {
             return View();
         }
-        
+
         [HttpPost]
         [Route("/reports/{id}")]
-        public async Task<IActionResult> CreateNew([FromForm]NewReportViewModel model)
+        public async Task<IActionResult> CreateNew([FromForm] NewReportViewModel model)
         {
             var report = await _reportRepository.CreateReport(model);
             return Redirect($"/reports/{report.Id}");
