@@ -1,4 +1,5 @@
 using Kirepos.Configuration;
+using Kirepos.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +22,9 @@ namespace Kirepos
         {
             // Add authentication services
             services.AddAuth0Authentication(Configuration);
-
+            services.AddDatabaseConfig(Configuration);
+            services.AddHttpContextAccessor();
+            services.AddTransient<ReportRepository>();
             services.AddControllersWithViews();
         }
 

@@ -1,0 +1,12 @@
+﻿@model Kirepos.Models.ViewModels.NewReportViewModel
+@{
+    ViewData["Title"] = "New Report";
+}
+
+<div class="text-center">
+    <form asp-controller="Reports" asp-action="CreateNew" method="post">
+        <input asp-for="Description" />
+        <input asp-for="ReportDate" />
+        <button type="submit">Submit</button>
+    </form>
+</div>
