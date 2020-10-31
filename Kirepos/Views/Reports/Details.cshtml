@@ -1,7 +1,13 @@
-﻿@{
+﻿@model Kirepos.Models.ViewModels.EditReportViewModel
+@{
     ViewData["Title"] = "Report overview";
 }
 
 <div class="text-center">
     Reports
+    <a asp-controller="Reports"
+asp-action="CreateNewReportLine"
+asp-route-id=@Model.Id
+    asp>Add Line</a>
+
 </div>

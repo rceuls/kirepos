@@ -7,10 +7,10 @@ namespace Kirepos.Models.ViewModels
     {
         [MinLength(2)]
         [MaxLength(1024)]
-        [Required] 
+        [Required]
         public string Description { get; set; }
-        
-        [DataType(DataType.Date)]	
+
+        [DataType(DataType.Date)]
         public DateTime ReportDate { get; set; }
     }
 }

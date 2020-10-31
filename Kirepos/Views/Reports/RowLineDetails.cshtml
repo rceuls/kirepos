@@ -1,0 +1,18 @@
+@model Kirepos.Models.ViewModels.NewReportLineViewModel
+@{
+    ViewData["Title"] = "Add line";
+}
+
+<div class="text-center">
+    <form asp-controller="Reports"
+asp-action="CreateNewReportLine"
+asp-route-id=@Model.ReportId
+method="post">
+        <input asp-for="Description" />
+        <input asp-for="Responsible" />
+        <input asp-for="Deadline" />
+        <input asp-for="Location" />
+
+        <button type="submit">Submit</button>
+    </form>
+</div>

@@ -70,7 +70,8 @@ namespace Kirepos.Configuration
                             {
                                 // transform to absolute
                                 var request = context.Request;
-                                postLogoutUri = request.Scheme + "://" + request.Host + request.PathBase + postLogoutUri;
+                                string v = request.Scheme + "://";
+                                postLogoutUri = v + request.Host + request.PathBase + postLogoutUri;
                             }
                             logoutUri += $"&returnTo={ Uri.EscapeDataString(postLogoutUri)}";
                         }

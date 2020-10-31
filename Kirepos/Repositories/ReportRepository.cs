@@ -33,5 +33,31 @@ namespace Kirepos.Repositories
 
             return rep;
         }
+
+        public async Task<ReportLine> AddReportLine(Guid id, NewReportLineViewModel model)
+        {
+            var reportLine = new ReportLine
+            {
+                Deadline = model.Deadline,
+                Description = model.Description,
+                Responsible = model.Responsible,
+                CreatedBy = _httpContext.HttpContext?.User?.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value,
+                CreatedOn = DateTimeOffset.UtcNow
+            };
+
+            var report = _ctx.Reports.Find(id);
+
+            if (report == default(Report))
+            {
+                throw new ArgumentException($"Report with id {id} does not exist");
+            }
+
+            reportLine.Report = report;
+
+            await _ctx.AddAsync(reportLine);
+            await _ctx.SaveChangesAsync();
+
+            return reportLine;
+        }
     }
 }

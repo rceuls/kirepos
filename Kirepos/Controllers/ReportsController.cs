@@ -35,7 +35,10 @@ namespace Kirepos.Controllers
         [Authorize]
         public IActionResult Details(Guid id)
         {
-            return View();
+            return View(new EditReportViewModel
+            {
+                Id = id
+            });
         }
 
         [HttpPost("{id}")]
@@ -43,6 +46,19 @@ namespace Kirepos.Controllers
         {
             var report = await _reportRepository.CreateReport(model);
             return Redirect($"/reports/{report.Id}");
+        }
+
+        [HttpPost("{id}/lines/new")]
+        public async Task<IActionResult> CreateNewReportLine(Guid id, [FromForm] NewReportLineViewModel model)
+        {
+            var reportLine = await _reportRepository.AddReportLine(id, model);
+            return Redirect($"/reports/{id}");
+        }
+
+        [HttpGet("{id}/lines/new")]
+        public IActionResult RowLineDetails(Guid id)
+        {
+            return View(new NewReportLineViewModel { ReportId = id });
         }
     }
 }

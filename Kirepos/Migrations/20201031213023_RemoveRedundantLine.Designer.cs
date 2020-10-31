@@ -3,14 +3,16 @@ using System;
 using Kirepos.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Kirepos.Migrations
 {
     [DbContext(typeof(KireposDatabaseContext))]
-    partial class KireposDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20201031213023_RemoveRedundantLine")]
+    partial class RemoveRedundantLine
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
