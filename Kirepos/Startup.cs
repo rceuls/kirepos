@@ -1,3 +1,4 @@
+using Kirepos.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +19,9 @@ namespace Kirepos
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add authentication services
+            services.AddAuth0Authentication(Configuration);
+
             services.AddControllersWithViews();
         }
 
@@ -38,7 +42,7 @@ namespace Kirepos
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
