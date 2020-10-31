@@ -38,8 +38,7 @@ namespace Kirepos.Controllers
             return View();
         }
 
-        [HttpPost]
-        [Route("/reports/{id}")]
+        [HttpPost("{id}")]
         public async Task<IActionResult> CreateNew([FromForm] NewReportViewModel model)
         {
             var report = await _reportRepository.CreateReport(model);

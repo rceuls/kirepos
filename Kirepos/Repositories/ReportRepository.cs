@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Kirepos.Models.Database;
 using Kirepos.Models.ViewModels;
@@ -16,15 +18,15 @@ namespace Kirepos.Repositories
             _ctx = ctx;
             _httpContext = httpContext;
         }
-        
+
         public async Task<Report> CreateReport(NewReportViewModel vm)
         {
             var rep = new Report()
             {
                 ReportedOn = vm.ReportDate.ToUniversalTime(),
                 Description = vm.Description,
-                CreatedBy = _httpContext.HttpContext?.User?.Identity?.Name,
-                CreatedOn =  DateTimeOffset.UtcNow
+                CreatedBy = _httpContext.HttpContext?.User?.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value,
+                CreatedOn = DateTimeOffset.UtcNow
             };
             await _ctx.Reports.AddAsync(rep);
             await _ctx.SaveChangesAsync();
